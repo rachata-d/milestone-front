@@ -1,14 +1,17 @@
 import React from "react";
-import bgImg from "../public/images/bgimg.png";
+import Modal from "../components/RegisterModal";
+// import bgImg from "../public/images/bgimg.png";
+import { useState } from "react";
+import { useAuth } from "../contexts/authContext";
 
 function Home() {
   return (
-    <>
-      <div className="">
-        <img src={bgImg} alt="backgroundImg" />
+    <div>
+      <div className="bg-[url('public/images/bgimg.png')] bg-cover h-[370px] w-screen">
+        {/* <img src={bgImg} alt="backgroundImg" /> */}
       </div>
-      <div>Item showcase</div>
-    </>
+      <div></div>
+    </div>
   );
 }
 
