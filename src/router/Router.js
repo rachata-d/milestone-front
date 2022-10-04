@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import AuthLayout from "../layouts/AuthLayout";
+import AdminLogin from "../pages/AdminLogin";
 import Home from "../pages/Home";
 import Listing from "../pages/Listing";
 import Profile from "../pages/Profile";
@@ -11,6 +12,7 @@ function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/listing" element={<Listing />} />
         <Route path="/user" element={<Profile />} />
+        <Route path="/adminextralogin" element={<AdminLogin />} />
       </Route>
     </Routes>
   );

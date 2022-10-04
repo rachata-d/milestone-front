@@ -9,7 +9,7 @@ import { useAuth } from "../contexts/authContext";
 function Navbar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, admin } = useAuth();
 
   return (
     <div>
@@ -26,11 +26,14 @@ function Navbar() {
           <Link to="/listing" className="md:hover:text-blue-600">
             Listings
           </Link>
-          {user ? (
+          {user || admin ? (
             <div>
               <Link to="/user" className="md:hover:text-blue-600">
                 Profile
               </Link>
+              {admin && (
+                <Link className="md:hover:text-blue-600 pl-14">Edit</Link>
+              )}
               <Link className="md:hover:text-red-600 pl-20" onClick={logout}>
                 Logout
               </Link>
@@ -51,6 +54,7 @@ function Navbar() {
               </Link>
             </div>
           )}
+
           <Modal open={registerOpen} close={() => setRegisterOpen(false)} />
           <LoginModal open={loginOpen} close={() => setLoginOpen(false)} />
         </div>
