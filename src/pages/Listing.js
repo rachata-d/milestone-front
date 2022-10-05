@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListingItem from "../components/ListingItem";
 import { useAuth } from "../contexts/authContext";
 import ItemCreateToggle from "../features/Items/ItemCreateToggle";
 import * as itemService from "../api/itemApi";
+import { useItem } from "../contexts/itemContext";
 
 function Listing() {
   const { admin } = useAuth();
   const [open, setIsOpen] = useState(false);
   const [item, setItem] = useState([]);
+  const { fetchItem } = useItem();
+
+  useEffect(() => {
+    const setDisplayItem = async () => {
+      try {
+        const itemData = await fetchItem();
+        setItem(itemData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    setDisplayItem();
+  }, []);
 
   // TODO create post here
 
@@ -35,14 +49,9 @@ function Listing() {
         </div>
       )}
       <div className="grid grid-flow-col grid-cols-4 grid-rows-2 gap-y-[50px] pl-[80px] pt-[25px]">
-        <ListingItem />
-        <ListingItem />
-        <ListingItem />
-        <ListingItem />
-        <ListingItem />
-        <ListingItem />
-        <ListingItem />
-        <ListingItem />
+        {item?.map((item) => (
+          <ListingItem key={item.id} item={item} />
+        ))}
       </div>
     </>
   );

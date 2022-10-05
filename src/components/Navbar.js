@@ -20,36 +20,45 @@ function Navbar() {
           </div>
         </Link>
         <div className="flex gap-20 items-center px-4 font-serif font-medium">
-          <Link to="/" className="md:hover:text-blue-600">
+          <Link to="/" className="md:hover:text-blue-600 font-bebas text-xl">
             Home
           </Link>
-          <Link to="/listing" className="md:hover:text-blue-600">
-            Listings
+          <Link
+            to="/listing"
+            className="md:hover:text-blue-600 font-bebas text-xl"
+          >
+            Listing
           </Link>
           {user || admin ? (
             <div>
-              <Link to="/user" className="md:hover:text-blue-600">
+              <Link
+                to="/user"
+                className="md:hover:text-blue-600 font-bebas text-xl"
+              >
                 Profile
               </Link>
               {admin && (
-                <Link className="md:hover:text-blue-600 pl-14 text-green-700">
+                <Link className="md:hover:text-blue-600 pl-14 text-green-700 font-bebas text-xl">
                   Admin
                 </Link>
               )}
-              <Link className="md:hover:text-red-600 pl-10" onClick={logout}>
+              <Link
+                className="md:hover:text-red-600 pl-10 font-bebas text-xl"
+                onClick={logout}
+              >
                 Logout
               </Link>
             </div>
           ) : (
             <div>
               <Link
-                className="md:hover:text-blue-600"
+                className="md:hover:text-blue-600 font-bebas text-xl"
                 onClick={() => setRegisterOpen(true)}
               >
                 Register
               </Link>
               <Link
-                className="md:hover:text-blue-600 ml-20"
+                className="md:hover:text-blue-600 ml-20 font-bebas text-xl"
                 onClick={() => setLoginOpen(true)}
               >
                 Login
