@@ -32,9 +32,11 @@ function Navbar() {
                 Profile
               </Link>
               {admin && (
-                <Link className="md:hover:text-blue-600 pl-14">Edit</Link>
+                <Link className="md:hover:text-blue-600 pl-14 text-green-700">
+                  Admin
+                </Link>
               )}
-              <Link className="md:hover:text-red-600 pl-20" onClick={logout}>
+              <Link className="md:hover:text-red-600 pl-10" onClick={logout}>
                 Logout
               </Link>
             </div>

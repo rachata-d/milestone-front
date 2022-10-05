@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuth } from "../contexts/authContext";
 
 function ListingItem() {
+  // const {
+  //   admin: { id },
+  // } = useAuth();
+
+  // const createItem = async (input) => {
+  //   try {
+  //     const res = await itemService.createItem();
+  //     setItem(res.data.item);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   return (
     <div className="max-w-[250px] bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <a href="#">

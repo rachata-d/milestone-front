@@ -1,22 +1,20 @@
-import { useAuth } from "../contexts/authContext";
+import { useAuth } from "../../contexts/authContext";
 import { useState } from "react";
 
-function LoginModal({ open, close, content, title }) {
-  const { login } = useAuth();
+// TODO props create post here
 
-  const [input, setInput] = useState({
-    email: "",
-    password: "",
-  });
+function ItemCreateToggle({ open, close, content, title, createItem }) {
+  const { admin } = useAuth();
+  const [input, setInput] = useState({ adminId: admin.id, categoryId: "" });
 
-  const handleChangeInput = async (e) => {
+  const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      await login(input);
+      await createItem(input);
     } catch (err) {
       console.log(err);
     } finally {
@@ -32,7 +30,6 @@ function LoginModal({ open, close, content, title }) {
   return (
     <form
       className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50"
-      onClick={close}
       onSubmit={handleSubmitForm}
     >
       <div className="flex justify-center items-center h-full">
@@ -44,29 +41,37 @@ function LoginModal({ open, close, content, title }) {
             x
           </button>
           <div className="flex justify-center pb-8">
-            <p className="font-serif font-semibold">LOGIN</p>
+            <p className="font-serif font-semibold">ADD NEW ITEM</p>
           </div>
           <div className="grid grid-rows-2 justify-center gap-8">
             <div className="flex gap-20">
               <input
-                name="email"
+                name="name"
                 type="text"
-                placeholder="EMAIL"
+                placeholder="Name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={input.email}
                 onChange={handleChangeInput}
               />
             </div>
             <div className="flex gap-10">
               <input
-                name="password"
-                type="password"
-                placeholder="PASSWORD"
+                name="description"
+                type="text"
+                placeholder="Description"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={input.password}
                 onChange={handleChangeInput}
               />
             </div>
+            <div className="flex gap-10">
+              <input
+                name="categoryId"
+                type="text"
+                placeholder="Category"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={handleChangeInput}
+              />
+            </div>
+
             <div className="flex justify-center">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                 SUBMIT
@@ -81,4 +86,4 @@ function LoginModal({ open, close, content, title }) {
   );
 }
 
-export default LoginModal;
+export default ItemCreateToggle;

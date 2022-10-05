@@ -42,7 +42,7 @@ function Modal({ open, close, content, title }) {
           className="bg-white pb-8 w-1/3 text-end px-3 text-xl rounded-xl"
           onClick={(e) => e.stopPropagation()}
         >
-          <button className="" onClick={close}>
+          <button type="button" className="" onClick={close}>
             x
           </button>
           <div className="flex justify-center pb-8">
