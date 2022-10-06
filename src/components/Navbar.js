@@ -13,7 +13,7 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="flex justify-between gap-5 shadow-lg bg-gray-100">
+      <nav className="flex justify-between gap-5 shadow-lg bg-gray-100 fixed top-0 right-0 left-0">
         <Link to="/">
           <div className="pt-4 w-[120px] h-[80px] mx-4">
             <img src={logo} alt="Mile-Logo"></img>

@@ -6,6 +6,7 @@ import { useState } from "react";
 function ItemCreateToggle({ open, close, content, title, createItem }) {
   const { admin } = useAuth();
   const [input, setInput] = useState({ adminId: admin.id, categoryId: "" });
+  const [image, setImage] = useState();
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -14,7 +15,12 @@ function ItemCreateToggle({ open, close, content, title, createItem }) {
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      await createItem(input);
+      const formData = new FormData();
+      formData.append("name", input.name);
+      formData.append("picture", image);
+      formData.append("description", input.description);
+      formData.append("categoryId", input.categoryId);
+      await createItem(formData);
     } catch (err) {
       console.log(err);
     } finally {
@@ -63,15 +69,30 @@ function ItemCreateToggle({ open, close, content, title, createItem }) {
               />
             </div>
             <div className="flex gap-10">
-              <input
+              <label htmlFor="Category">Category:</label>
+
+              <select
                 name="categoryId"
-                type="text"
-                placeholder="Category"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                id="Category"
                 onChange={handleChangeInput}
+              >
+                <option value="1">Antiques</option>
+                <option value="2">Art</option>
+                <option value="3">Utensil</option>
+                <option value="4">Furniture</option>
+                <option value="5">Decoration</option>
+              </select>
+            </div>
+            <div>
+              <input
+                name="picture"
+                type="file"
+                multiple
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                }}
               />
             </div>
-
             <div className="flex justify-center">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                 SUBMIT

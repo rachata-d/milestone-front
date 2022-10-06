@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/authContext";
 
-function ListingItem() {
+function ListingItem({ item }) {
   // const {
   //   admin: { id },
   // } = useAuth();
@@ -18,19 +18,17 @@ function ListingItem() {
   return (
     <div className="max-w-[250px] bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <a href="#">
-        <img
-          className="rounded-t-lg"
-          src="/docs/images/blog/image-1.jpg"
-          alt=""
-        />
+        <img className="rounded-t-lg" src={item.picture} alt="" />
       </a>
       <div className="p-5">
         <a href="#">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Item Name
+            {item.name}
           </h5>
         </a>
-
+        <div className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          {item.status}
+        </div>
         <a
           href="#"
           className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
