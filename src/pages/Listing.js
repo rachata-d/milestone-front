@@ -3,12 +3,14 @@ import ListingItem from "../components/ListingItem";
 import { useAuth } from "../contexts/authContext";
 import ItemCreateToggle from "../features/Items/ItemCreateToggle";
 import * as itemService from "../api/itemApi";
+import * as lotService from "../api/lotApi";
 import { useItem } from "../contexts/itemContext";
 
 function Listing() {
   const { admin } = useAuth();
   const [open, setIsOpen] = useState(false);
   const [item, setItem] = useState([]);
+  const [lot, setLot] = useState([]);
   const { fetchItem } = useItem();
 
   useEffect(() => {
@@ -29,6 +31,15 @@ function Listing() {
     try {
       const res = await itemService.createItem(input);
       setItem([res.data.item]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const createLot = async (input) => {
+    try {
+      const res = await lotService.createLot(input);
+      setLot([res.data.item]);
     } catch (err) {
       console.log(err);
     }

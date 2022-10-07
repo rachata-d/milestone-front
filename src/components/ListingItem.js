@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/authContext";
+import LotCreateToggle from "../features/lots/LotCreateToggle";
 
 function ListingItem({ item }) {
+  const { admin } = useAuth();
+  const [open, setIsOpen] = useState(false);
   // const {
   //   admin: { id },
   // } = useAuth();
@@ -48,6 +51,21 @@ function ListingItem({ item }) {
             ></path>
           </svg>
         </a>
+        {admin && (
+          <div className="pt-5">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+              onClick={() => setIsOpen(true)}
+            >
+              Create Lot
+            </button>
+            <LotCreateToggle
+              open={open}
+              close={() => setIsOpen(false)}
+              item={item}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

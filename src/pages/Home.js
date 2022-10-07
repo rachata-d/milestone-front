@@ -28,7 +28,7 @@ function Home() {
         <div className="bg-[url('public/images/bgimg.png')] bg-cover h-[370px] w-screen"></div>
       </div>
 
-      <div className="relative flex overflow-x-hidden">
+      <div className="relative flex overflow-x-hidden -z-[40]">
         <div className="py-12 animate-marquee whitespace-nowrap">
           <span className="text-4xl mx-4 font-lobster text-zinc-700">
             WELCOME TO MILESTONE AUCTIONS
@@ -41,7 +41,7 @@ function Home() {
           <span className="text-4xl mx-4 font-lobster text-zinc-700"></span>
         </div>
 
-        <div className="absolute top-0 py-12 animate-marquee2 whitespace-nowrap">
+        <div className="absolute top-0 py-12 animate-marquee2 whitespace-nowrap z-40">
           <span className="text-4xl mx-4 font-lobster text-zinc-700">
             WELCOME TO MILESTONE AUCTIONS
           </span>
