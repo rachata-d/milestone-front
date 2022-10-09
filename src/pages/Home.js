@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
-import Modal from "../components/RegisterModal";
+import React, { useCallback, useEffect } from "react";
 // import bgImg from "../public/images/bgimg.png";
 import { useState } from "react";
-import { useAuth } from "../contexts/authContext";
 import ListingItem from "../components/ListingItem";
 import { useItem } from "../contexts/itemContext";
 
@@ -10,17 +8,18 @@ function Home() {
   const [item, setItem] = useState([]);
   const { fetchItem } = useItem();
 
+  const setDisplayItem = useCallback(async () => {
+    try {
+      const itemData = await fetchItem();
+      setItem(itemData);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [fetchItem]);
+
   useEffect(() => {
-    const setDisplayItem = async () => {
-      try {
-        const itemData = await fetchItem();
-        setItem(itemData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     setDisplayItem();
-  }, []);
+  }, [setDisplayItem]);
 
   return (
     <>

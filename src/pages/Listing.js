@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ListingItem from "../components/ListingItem";
 import { useAuth } from "../contexts/authContext";
 import ItemCreateToggle from "../features/Items/ItemCreateToggle";
@@ -11,18 +11,18 @@ function Listing() {
   const [item, setItem] = useState([]);
   const { fetchItem } = useItem();
 
-  const setDisplayItem = async () => {
+  const setDisplayItem = useCallback(async () => {
     try {
       const itemData = await fetchItem();
       setItem(itemData);
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [fetchItem]);
 
   useEffect(() => {
     setDisplayItem();
-  }, []);
+  }, [setDisplayItem]);
 
   const createItem = async (input) => {
     try {
@@ -47,6 +47,7 @@ function Listing() {
     try {
       const res = await itemService.updateItem(input);
       setDisplayItem();
+      console.log(res);
     } catch (err) {
       console.log(err);
     }

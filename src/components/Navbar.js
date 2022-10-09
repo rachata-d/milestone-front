@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../public/images/manewlogo.png";
 import LoginModal from "./LoginModal";
 import Modal from "./RegisterModal";
@@ -10,7 +10,6 @@ function Navbar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
   const { user, logout, admin } = useAuth();
-  const navigate = useNavigate();
 
   return (
     <div>
