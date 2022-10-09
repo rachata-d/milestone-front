@@ -12,7 +12,7 @@ function AdminLogin({ open, close, content, title }) {
     password: "",
   });
 
-  const [loginOpen, setLoginOpen] = useState();
+  // const [loginOpen, setLoginOpen] = useState();
 
   const handleChangeInput = async (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });

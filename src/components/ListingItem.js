@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/authContext";
 import LotCreateToggle from "../features/lots/LotCreateToggle";
 
-function ListingItem({ item }) {
+function ListingItem({ item, deleteItem, update, hide = false }) {
   const { admin } = useAuth();
   const [open, setIsOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [input, setInput] = useState({
+    id: item.id,
+    name: "",
+    description: "",
+    status: "",
+  });
   // const {
   //   admin: { id },
   // } = useAuth();
@@ -17,24 +24,90 @@ function ListingItem({ item }) {
   //     console.log(err);
   //   }
   // };
+  const handleSubmitEdit = () => {
+    try {
+      update(input);
+      setEdit(false);
+      setInput({
+        id: item.id,
+        name: "",
+        description: "",
+        status: "",
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
-    <div className="max-w-[250px] bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-[250px] bg-white rounded-lg border border-gray-200 shadow-md">
+      {admin && !hide && (
+        <div className="flex justify-between">
+          <button onClick={() => deleteItem(item.id)}>X</button>
+          <>
+            <button className="pr-4" onClick={handleSubmitEdit}>
+              Submit Edit
+            </button>
+            <button onClick={() => setEdit((prev) => !prev)}>Edit</button>
+          </>
+        </div>
+      )}
       <a href="#">
         <img className="rounded-t-lg" src={item.picture} alt="" />
       </a>
       <div className="p-5">
-        <a href="#">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {edit ? (
+          <input
+            type="text"
+            className="border-2 border-blue-500"
+            value={input.name}
+            onChange={(e) => setInput({ ...input, name: e.target.value })}
+            placeholder="Edit Name"
+          />
+        ) : (
+          <div className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
             {item.name}
-          </h5>
-        </a>
-        <div className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {item.status}
-        </div>
+          </div>
+        )}
+        {edit ? (
+          <input
+            type="text"
+            className="border-2 border-blue-500"
+            value={input.status}
+            onChange={(e) => setInput({ ...input, status: e.target.value })}
+            placeholder="Edit Status"
+          />
+        ) : (
+          <div
+            className={`mb-2 text-2xl uppercase font-bold tracking-tight ${
+              item.status === "sold"
+                ? " text-red-500 "
+                : item.status === "available"
+                ? " text-green-500 "
+                : "text-yellow-500"
+            }`}
+          >
+            {item.status}
+          </div>
+        )}
+        {edit ? (
+          <input
+            type="text"
+            className="border-2 border-blue-500"
+            value={input.description}
+            onChange={(e) =>
+              setInput({ ...input, description: e.target.value })
+            }
+            placeholder="Edit Description"
+          />
+        ) : (
+          <div className="mb-2 text-2xl tracking-tight text-gray-400">
+            {item.description}
+          </div>
+        )}
         <a
           href="#"
-          className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
         >
           View Details
           <svg

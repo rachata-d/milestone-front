@@ -1,37 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLot } from "../contexts/lotContext";
 
 function AuctionPage() {
+  const { fetchLot } = useLot();
+  const [lot, setLot] = useState();
+
+  useEffect(() => {
+    const setDisplayLot = async () => {
+      try {
+        const lotData = await fetchLot();
+        // console.log(lotData);
+        setLot(lotData);
+      } catch (err) {
+        // console.log(err);
+      }
+    };
+    setDisplayLot();
+    // console.log(lot);
+  }, []);
+  // console.log(lot);
+
   return (
     <>
-      <div className="flex justify-center text-[45px]">Ongoing Auction</div>
-      <div className=" flex h-screen justify-center items-center">
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-          <img
-            className="w-full"
-            src="/img/card-top.jpg"
-            alt="Sunset in the mountains"
-          />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-            <p className="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
-            </p>
+      <div className="flex justify-center text-[45px] pb-8">
+        Ongoing Auction
+      </div>
+      {lot ? (
+        <div className="flex justify-center gap-[200px]">
+          <div className=" flex justify-center items-center">
+            <div className="max-w-sm rounded overflow-hidden shadow-lg">
+              <div className="text-[30px] text-center font-bold">
+                {lot?.name}
+              </div>
+              <img src={lot?.Item.picture} />
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2"></div>
+                <p className="text-[20px] font-bold">{lot?.Item.name}</p>
+                <p className="text-gray-700 text-base">{lot?.description}</p>
+              </div>
+            </div>
           </div>
-          <div className="px-6 pt-4 pb-2">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              #photography
-            </span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              #travel
-            </span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-              #winter
-            </span>
+          <div>
+            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+              <div className="mb-6">
+                <p>Auction Start:</p> <br /> <p>Auction End:</p>
+              </div>
+              <div>Starting Bid:</div>
+              <br />
+              <div className="mb-4">Current Bid:</div>
+              <div className="px-6 pt-4 pb-2 flex justify-center">
+                <button className="inline-block bg-blue-500 rounded-full px-3 py-1 text-xl font-semibold text-white mr-2 mb-2">
+                  Place Bid
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../public/images/manewlogo.png";
 import LoginModal from "./LoginModal";
 import Modal from "./RegisterModal";
@@ -10,6 +10,7 @@ function Navbar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
   const { user, logout, admin } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -30,19 +31,28 @@ function Navbar() {
             Listing
           </Link>
           {user || admin ? (
-            <div>
+            <div className="flex">
               <Link
                 to="/user"
                 className="md:hover:text-blue-600 font-bebas text-xl"
               >
                 Profile
               </Link>
+              <div className="pl-10">
+                <Link
+                  to="/auction"
+                  className="md:hover:text-blue-600 font-bebas text-xl"
+                >
+                  Auction
+                </Link>
+              </div>
               {admin && (
                 <Link className="md:hover:text-blue-600 pl-14 text-green-700 font-bebas text-xl">
                   Admin
                 </Link>
               )}
               <Link
+                to="/"
                 className="md:hover:text-red-600 pl-10 font-bebas text-xl"
                 onClick={logout}
               >

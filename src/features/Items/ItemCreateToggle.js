@@ -73,9 +73,10 @@ function ItemCreateToggle({ open, close, content, title, createItem }) {
 
               <select
                 name="categoryId"
-                id="Category"
+                id="categoryId"
                 onChange={handleChangeInput}
               >
+                <option value=""></option>
                 <option value="1">Antiques</option>
                 <option value="2">Art</option>
                 <option value="3">Utensil</option>

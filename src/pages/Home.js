@@ -55,7 +55,7 @@ function Home() {
       </div>
       <div className="grid grid-flow-col grid-cols-4 gap-y-[50px] pl-[80px]">
         {item?.slice(0, 4).map((item) => (
-          <ListingItem key={item.id} item={item} />
+          <ListingItem key={item.id} item={item} hide={true} />
         ))}
       </div>
     </>
