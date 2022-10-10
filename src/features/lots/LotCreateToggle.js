@@ -1,4 +1,3 @@
-import { useAuth } from "../../contexts/authContext";
 import { useState } from "react";
 import { createLot } from "../../api/lotApi";
 
@@ -89,7 +88,7 @@ function LotCreateToggle({ open, close, item }) {
             <div className="flex gap-10">
               <input
                 name="auctionStart"
-                type="date"
+                type="datetime-local"
                 placeholder="Auction Start Date"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 onChange={handleChangeInput}
@@ -98,7 +97,7 @@ function LotCreateToggle({ open, close, item }) {
             <div className="flex gap-10">
               <input
                 name="auctionEnd"
-                type="date"
+                type="datetime-local"
                 placeholder="Auction End Date"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 onChange={handleChangeInput}

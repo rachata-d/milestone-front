@@ -30,14 +30,14 @@ function Navbar() {
             Listing
           </Link>
           {user || admin ? (
-            <div className="flex">
-              <Link
+            <div className="flex gap-20">
+              {/* <Link
                 to="/user"
                 className="md:hover:text-blue-600 font-bebas text-xl"
               >
                 Profile
-              </Link>
-              <div className="pl-10">
+              </Link> */}
+              <div className="">
                 <Link
                   to="/auction"
                   className="md:hover:text-blue-600 font-bebas text-xl"
@@ -46,20 +46,20 @@ function Navbar() {
                 </Link>
               </div>
               {admin && (
-                <Link className="md:hover:text-blue-600 pl-14 text-green-700 font-bebas text-xl">
+                <Link className="md:hover:text-blue-600 text-green-700 font-bebas text-xl">
                   Admin
                 </Link>
               )}
               <Link
                 to="/"
-                className="md:hover:text-red-600 pl-10 font-bebas text-xl"
+                className="md:hover:text-red-600 font-bebas text-xl"
                 onClick={logout}
               >
                 Logout
               </Link>
             </div>
           ) : (
-            <div>
+            <div className="flex gap-20">
               <Link
                 className="md:hover:text-blue-600 font-bebas text-xl"
                 onClick={() => setRegisterOpen(true)}
@@ -67,7 +67,7 @@ function Navbar() {
                 Register
               </Link>
               <Link
-                className="md:hover:text-blue-600 ml-20 font-bebas text-xl"
+                className="md:hover:text-blue-600 font-bebas text-xl"
                 onClick={() => setLoginOpen(true)}
               >
                 Login

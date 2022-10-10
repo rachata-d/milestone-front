@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./contexts/authContext";
 import ItemContextProvider from "./contexts/itemContext";
 import LotContextProvider from "./contexts/lotContext";
+import BidContextProvider from "./contexts/bidContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,9 +15,11 @@ root.render(
     <AuthContextProvider>
       <ItemContextProvider>
         <LotContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <BidContextProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </BidContextProvider>
         </LotContextProvider>
       </ItemContextProvider>
     </AuthContextProvider>

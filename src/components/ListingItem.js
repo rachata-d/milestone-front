@@ -41,7 +41,7 @@ function ListingItem({ item, deleteItem, update, hide = false }) {
   };
 
   return (
-    <div className="max-w-[250px] bg-white rounded-lg border border-gray-200 shadow-md">
+    <div className="max-w-[250px] bg-white rounded-lg border border-gray-200 shadow-md font-bebas">
       {admin && !hide && (
         <div className="flex justify-between">
           <button onClick={() => deleteItem(item.id)}>X</button>
