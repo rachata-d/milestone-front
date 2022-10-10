@@ -18,7 +18,9 @@ function AuthContextProvider({ children }) {
     const fetchUser = async () => {
       try {
         if (getAccessToken()) {
+          console.log("Hello");
           const payload = jwt_decode(getAccessToken());
+          console.log(payload);
           if (payload.role === "USER") await getMe();
           else if (payload.role === "ADMIN") await getAdmin();
         }

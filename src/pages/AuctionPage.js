@@ -4,6 +4,7 @@ import * as lotService from "../api/lotApi";
 import { useAuth } from "../contexts/authContext";
 import dateFormat from "dateformat";
 import { useBid } from "../contexts/bidContext";
+import Countdown from "react-countdown";
 
 function AuctionPage() {
   const { fetchLot } = useLot();
@@ -76,6 +77,10 @@ function AuctionPage() {
     "Bidding Closed": "text-red-600",
   };
 
+  const onComplete = async () => {
+    await lotService.updateLot({ ...input, status: "Bidding Closed" });
+  };
+
   return (
     <>
       <div className="flex justify-center text-[45px] pb-8 font-bebas">
@@ -126,10 +131,21 @@ function AuctionPage() {
               </form>
             ) : null}
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 font-bebas">
-              <div className="mb-6">
-                <p>Auction Start: {auctionDateStartHandler}</p> <br />
-                <p>Auction End: {auctionDateEndHandler}</p>
-              </div>
+              {lot.status === "Ongoing" ? (
+                <div className="pb-4">
+                  Time remaining:{" "}
+                  <Countdown
+                    date={lot?.auctionEnd}
+                    onComplete={onComplete}
+                    className="text-red-500"
+                  />
+                </div>
+              ) : (
+                <div className="mb-6">
+                  <p>Auction Start: {auctionDateStartHandler}</p> <br />
+                  <p>Auction End: {auctionDateEndHandler}</p>
+                </div>
+              )}
               <div>Starting Bid: ${lot.startingBid}</div>
               <br />
               <div className="mb-4">Current Bid: ${highestBid}</div>
