@@ -78,7 +78,11 @@ function AuctionPage() {
   };
 
   const onComplete = async () => {
-    await lotService.updateLot({ ...input, status: "Bidding Closed" });
+    try {
+      await lotService.updateLot({ ...input, status: "Bidding Closed" });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
