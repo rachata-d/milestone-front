@@ -1,18 +1,16 @@
-import React from "react";
-import { useAuth } from "../contexts/authContext";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React from 'react';
+import { useAuth } from '../contexts/authContext';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function AdminLogin({ open, close, content, title }) {
   const { adminLogin } = useAuth();
   const navigate = useNavigate();
 
   const [input, setInput] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-
-  // const [loginOpen, setLoginOpen] = useState();
 
   const handleChangeInput = async (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -22,11 +20,11 @@ function AdminLogin({ open, close, content, title }) {
     e.preventDefault();
     try {
       await adminLogin(input);
-      navigate("/");
+      navigate('/');
     } catch (err) {
       console.log(err);
     } finally {
-      setInput("");
+      setInput('');
     }
   };
 
